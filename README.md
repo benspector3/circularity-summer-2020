@@ -11,15 +11,15 @@ The portrait of the programmer as a young artist continues, using random number 
 
 Some concepts you'll practice and learn:
 * Drawing with CreateJS and our draw utility.
-* Leveraging the power of built-in and 3rd party API (DRY), like Math and opspark-draw.
+* Leveraging the power of Arrays to manage large quantities of data
+* Utilizing loops to reduce repetitive code
 * Variable declaration and initialization.
 * Function invocation and passing arguments to functions.
-* Looping.
 * Conditional statements - making decisions in code.
 * Recognizing code blocks.
 * Calculating coordinates in a cartesian system.
 * Calculating boundaries.
-* Animating.
+* Animating math
 
 Note that **this app will run _in a web browser_**, preferably Chrome.
 
