@@ -81,11 +81,11 @@ randomNumberBetween(2, 5); // returns a random decimal between 2 and 5
 
 This function uses some slightly confusing math to get the job done so let me briefly explain:
 
-* `max - min`: the difference of the `max` and `min`, in this case `5 - 2 === 3`
-* `Math.random() * difference`: a random number between `0` and `difference`, in this case between `0` and `3` (say, `1.234` for example)
-* `min + randomValue`: in this case, `2 + 1.234 === 3.234`
+* `max - min`: the difference between the largest (`5`) and smallest (`2`) values which tells us how many values are in between (`3`)
+* `Math.random() * difference`: a random number between `0` and `difference`, in this case between `0` and `3`. For the sake of example, let's say this random value is `1.234`.
+* `min + randomValue`: Add this random value to the minimum value. In this example, `2 + 1.234 === 3.234`. The smallest value returned will be `min` while the largest value will be `min + difference === max`.
 
-**CODE**: Above your code from TODO 1, copy the `randomNumberBetween` function into your code. Then, add to your code from TODO 1 such that you assign random values to `circle.velocityX` and `circle.velocityY` between `-1` and `1`.
+**CODE**: Still in the `PROGRAM SETUP` section but above your code from TODO 1, copy the `randomNumberBetween` function into your code. Then, add to your code from TODO 1 such that you assign random values between `-1` and `1` to `circle.velocityX` and `circle.velocityY`.
 
 <details><summary> Hint <summary>
 
@@ -94,6 +94,11 @@ This function uses some slightly confusing math to get the job done so let me br
 Upon completing this step, your code should look like this:
 
 ```js
+
+////////////////////////////////////////////////////////////
+////////////////// PROGRAM SETUP ///////////////////////////
+////////////////////////////////////////////////////////////
+
 function randomNumberBetween(min, max) {
     var difference = max - min;
     var randomValue = Math.random() * difference;
