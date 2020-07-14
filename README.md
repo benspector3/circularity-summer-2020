@@ -87,7 +87,7 @@ This function uses some slightly confusing math to get the job done so let me br
 
 **CODE**: Still in the `PROGRAM SETUP` section but above your code from TODO 1, copy the `randomNumberBetween` function into your code. Then, add to your code from TODO 1 such that you assign random values between `-1` and `1` to `circle.velocityX` and `circle.velocityY`.
 
-<details><summary> Hint <summary>
+<details> <summary> Hint </summary>
 
 <p>
 
