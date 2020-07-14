@@ -44,13 +44,16 @@ All coding will be done in the `js/init.js` file.
 
 ```js
 var circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle); 
+view.addChild(circle);
 ```
 
-For this project, you have been provided with the 2 functions above to will help you create a beautiful animation: 
-- `draw.randomCircleInArea` creates a new circle drawing and creates all of the data associated with that new circle. The data we care about are the circle’s `x`, `y`, `velocityX`, `velocityY`, and `radius`. All of these values are stored together in an *object* which is returned by the function.
-- `circle` stores the returned object with `circle.x`, `circle.y`, `circle.velocityX`, `circle.velocityY`, `circle.radius` properties.
-- `view.addChild` takes the `circle` object we just created and makes it visible. Without this step, we would have the data for the circle, but it would not be rendered. 
+For this project, you have been provided with the 2 functions above to will help you create a beautiful animation:
+
+* `draw.randomCircleInArea` creates a new circle drawing and creates all of the data associated with that new circle. The data we care about are the circle’s `x`, `y`, `velocityX`, `velocityY`, and `radius`. All of these values are stored together in an *object* which is returned by the function.
+
+* `circle` stores the returned object with `circle.x`, `circle.y`, `circle.velocityX`, `circle.velocityY`, `circle.radius` properties.
+
+* `view.addChild` takes the `circle` object we just created and makes it visible. Without this step, we would have the data for the circle, but it would not be rendered. 
 
 **CODE**: Open the `js/init.js` file if you haven't already done so. Below the `PROGRAM SETUP` area add the two lines of code above. Save your `js/init.js` file and refresh the preview and you will see a circle on your screen.
 
@@ -58,15 +61,66 @@ For this project, you have been provided with the 2 functions above to will help
 
 ## TODO 2: Reposition the circle
 
-Now lets get the ball moving! We can use the same math from bouncing box to recalculate the new position of the circle. In bouncing box we did the following:
+Now lets get the circle moving! This TODO has 2 steps.
+
+### Step 1: Set a random velocity for the circle
+
+In order to move the circle, we first need to change it's `.velocityX` and `.velocityY` properties which are, by default, set to `0`.
+
+Instead, we want these values to be randomly chosen numbers between `-1` and `1`. Given any two values, the function below will return a random decimal value between those two numbers.
+
+```js
+function randomNumberBetween(min, max) {
+    var difference = max - min;
+    var randomValue = Math.random() * difference;
+    return min + randomValue;
+}
+
+randomNumberBetween(2, 5); // returns a random decimal between 2 and 5
+```
+
+This function uses some slightly confusing math to get the job done so let me briefly explain:
+
+* `max - min`: the difference of the `max` and `min`, in this case `5 - 2 === 3`
+* `Math.random() * difference`: a random number between `0` and `difference`, in this case between `0` and `3` (say, `1.234` for example)
+* `min + randomValue`: in this case, `2 + 1.234 === 3.234`
+
+**CODE**: Above your code from TODO 1, copy the `randomNumberBetween` function into your code. Then, add to your code from TODO 1 such that you assign random values to `circle.velocityX` and `circle.velocityY` between `-1` and `1`.
+
+<details><summary> Hint <summary>
+
+<p>
+
+Upon completing this step, your code should look like this:
+
+```js
+function randomNumberBetween(min, max) {
+    var difference = max - min;
+    var randomValue = Math.random() * difference;
+    return min + randomValue;
+}
+
+var circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+view.addChild(circle);
+circle.velocityX = randomNumberBetween(-1, 1);
+circle.velocityY = randomNumberBetween(-1, 1);
+```
+
+</p>
+</details>
+
+### Step 2: Animate the circles
+
+We can use the same math from bouncing box to recalculate the new position of the circle. In bouncing box we did the following:
 
 ```js
 positionX = positionX + speed;
 ```
 
 In this project, the data is stored in a single object in the `circle` variable rather than in multiple variables:
-- Instead of `positionX` we have `circle.x` (and `circle.y`)
-- Instead of `speed` we have `circle.velocityX` (and `circle.velocityY`)
+
+* Instead of `positionX` we have `circle.x` (and `circle.y`)
+* Instead of `speed` we have `circle.velocityX` (and `circle.velocityY`)
 
 **CODE**: Inside the `update` function's `{code block}`, reposition the circle using the `circle.x`, `circle.velocityX`, `circle.y` and `circle.velocityY` properties. If done correctly, the circle should move!
 
@@ -93,14 +147,15 @@ In this step, we will expand the project and create multiple circles! This TODO 
 **CODE** First, duplicate the code from TODO 1 so that you have a total of 5 circles drawn on your screen. For each circle, you should modify the name of the variable so that each circle has it's own variable name.
 
 <details><summary>Hint</summary>
+
 <p>
 
 ```js
 var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle); 
+view.addChild(circle);
 
 var circle2 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle); 
+view.addChild(circle);
 
 //... the same thing above to create circle3, circle4, and circle5
 ```
@@ -135,8 +190,9 @@ circle2.y = circle2.y + circle2.velocityY;
 Expanding this project to 5 circles is quite easy and fairly quick by copying and pasting code. Expanding the project to 100 circles, however, would take a while.
 
 The main issue is that we would need 100 separate variables that each contain the data for each circle. We would also need to have 100 copies of the code for creating and moving each circle. This sort of repetition presents an opportunity to program smarter, not harder by doing the following:
-- Using an **Array** will enable us to better manage large quantities of data that all need to be treated the same.
-- Using **loops** will enable us to more efficiently repeat code.
+
+* Using an **Array** will enable us to better manage large quantities of data that all need to be treated the same.
+* Using **loops** will enable us to more efficiently repeat code.
 
 This TODO will introduce Arrays and TODO 5 will introduce Loops. This TODO will have multiple steps.
 
@@ -149,10 +205,11 @@ var myArray = [];
 ```
 
 Let me briefly explain this example:
-- `var myArray`: we begin by declaring a new variable to hold this Array of data. We give it the name `myArray` (but we want our Array to be called `circles`)
-- `[]`: the `[` and `]` mark the beginning and end of the Array. Values that are added to the Array will go between those brackets.
 
-**CODE**: First, in the `PROGRAM SETUP` area and above your code for drawing your circles, declare a new array called `circles`. 
+* `var myArray`: we begin by declaring a new variable to hold this Array of data. We give it the name `myArray` (but we want our Array to be called `circles`)
+* `[]`: the `[` and `]` mark the beginning and end of the Array. Values that are added to the Array will go between those brackets.
+
+**CODE**: First, in the `PROGRAM SETUP` area and above your code for drawing your circles, declare a new array called `circles`.
 
 ### Step 4.2) Push every circle into the Array
 
@@ -162,7 +219,7 @@ Now we need to add each circle object into the `circles` Array. The syntax for p
 myArray.push(value);
 ```
 
-**CODE:** For each circle that you draw and add to the `view`, push that `circle` variable into the `circles` array. 
+**CODE:** For each circle that you draw and add to the `view`, push that `circle` variable into the `circles` array.
 
 <details><summary>Hint</summary>
 <p>
@@ -170,10 +227,10 @@ myArray.push(value);
 ```js
 // you should already have these two lines
 var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle1); 
+view.addChild(circle1);
 
 // add this line below
-circles.push(circle1); 
+circles.push(circle1);
 
 // do the same for each of your circle variables
 ```
@@ -185,16 +242,17 @@ circles.push(circle1);
 
 ## TODO 5: Loops
 
-Ok so big whoop, our data is now in Array. But wasn't the purpose to _reduce_ the number of variables, not make more? 
+Ok so big whoop, our data is now in Array. But wasn't the purpose to _reduce_ the number of variables, not make more?
 
 When we introduce a loop, all of those extra variables will go away. Remember, to create a loop you can follow the example below. This example will run 10 times by doing the following:
-- `var count = 1`: start counting at 1
-- `count++`: count up by 1s
-- `count <= 10`: keep counting *while* `count <= 10` (at 11 it won't run)
+
+* `var count = 1`: start counting at 1
+* `count++`: count up by 1s
+* `count <= 10`: keep counting *while* `count <= 10` (at 11 it won't run)
 
 ```js
-for (var count = 1; count <= 10; count++) { 
-	// code block for loop 
+for (var count = 1; count <= 10; count++) {
+    // code block for loop
 }
 ```
 
@@ -206,10 +264,10 @@ for (var count = 1; count <= 10; count++) {
 
 ```js
 {
-	// code block for the for loop
-	var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-	view.addChild(circleX); 
-	circles.push(circleX); 
+    // code block for the for loop
+    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+    view.addChild(circleX);
+    circles.push(circleX);
 }
 ```
 
@@ -219,11 +277,11 @@ We can keep using the same variable `circleX` over and over because we only real
 <p>
 
 ```js
-for (var count = 1; count <= 100; count++) { 
-	// code block for the for loop
-	var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-	view.addChild(circleX); 
-	circles.push(circleX); 
+for (var count = 1; count <= 100; count++) {
+    // code block for the for loop
+    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+    view.addChild(circleX);
+    circles.push(circleX);
 }
 ```
 
@@ -236,7 +294,7 @@ As I mentioned above, your circles won't be able to move now. That's because we 
 
 The most straightforward (but repetitive and tiresome) approach to fixing this would be to do the following:
 
-```
+```js
 circles[0].x = circles[0].x + circles[0].velocityX;
 circles[0].y = circles[0].y + circles[0].velocityY;
 
@@ -247,6 +305,7 @@ circles[1].y = circles[1].y + circles[1].velocityY;
 ```
 
 Let me briefly explain the code above:
+
 * We use **Bracket Notation** to access the one circle at a time from the `circles` Array. For example, `circles[0]` will give us the first circle object in the Array.
 * Each value in the Array is an object so we then use **Dot Notation** to access/modify the `.x` , `.y`, `.velocityX`, and `.velocityY` properties.
 * The code above is repeated for every value in the `circles` Array from index 0 to index 99.
@@ -256,11 +315,12 @@ Obviously, doing this 100 times would be incredibly time consuming and inefficie
 **CODE**: In the `update` function's `{code block}`, *replace* your repetitive code that moves your circles with a `for` loop. The loop should run once for each index/value in the `circles` array. 
 
 You can use the code block below, however, you will need to replace the `"?"` so that the computer changes which circle is being moved on each loop.
+
 ```js
 {
-	// code block for the for loop
-	circles["?"].x = circles["?"].x + circles["?"].velocityX;
-	circles["?"].y = circles["?"].y + circles["?"].velocityY
+    // code block for the for loop
+    circles["?"].x = circles["?"].x + circles["?"].velocityX;
+    circles["?"].y = circles["?"].y + circles["?"].velocityY
 }
 ```
 
@@ -269,15 +329,16 @@ You can use the code block below, however, you will need to replace the `"?"` so
 
 ```js
 for (var i = 0; i <= circles.length-1; i++) { 
-	circles[i].x = circles[i].x + circles[i].velocityX;
-	circles[i].y = circles[i].y + circles[i].velocityY
+    circles[i].x = circles[i].x + circles[i].velocityX;
+    circles[i].y = circles[i].y + circles[i].velocityY
 }
 ```
 A few things to note about this solution:
-- The loop starts counting with `i = 0`, the first index of every Array.
-- The loop increases `i` by `1` since indexes of an Array increase by 1.
-- The loop stops after `i = circles.length-1`, the last index of the `circles` Array.
-- `circles[i]` accesses a different value from the `circles` array depending on the value of `i`
+
+* The loop starts counting with `i = 0`, the first index of every Array.
+* The loop increases `i` by `1` since indexes of an Array increase by 1.
+* The loop stops after `i = circles.length-1`, the last index of the `circles` Array.
+* `circles[i]` accesses a different value from the `circles` array depending on the value of `i`
 </p>
 </details>
 
@@ -304,26 +365,29 @@ At this point you'll notice that the circles only come back if they exit through
 ### Step 6.2) Complete the `game.checkCirclePosition()` Function
 
 Currently, the function contains the following code:
+
 ```javascript
 game.checkCirclePosition = function(circle) {
-	// if the circle has gone past the RIGHT side of the screen then place it on the LEFT
-	if (circle.x > canvas.width) {
-		circle.x = 0;
-	}
-	// ...
+    // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
+    if (circle.x > canvas.width) {
+        circle.x = 0;
+    }
+    // ...
 }
 ```
 
 Let me briefly explain the code above:
-- The parameter `circle` is the variable used to hold a circle object that can be given to the function. 
-- Upon receiving a `circle`, the function checks to see if that `circle` has drifted beyond the right edge of the screen (`circle.x > canvas.width`).
-- If it has, move the received `circle` to the left edge of the screen (`circle.x = 0`). 
+
+* The parameter `circle` is the variable used to hold a circle object that can be given to the function. 
+* Upon receiving a `circle`, the function checks to see if that `circle` has drifted beyond the right edge of the screen (`circle.x > canvas.width`).
+* If it has, move the received `circle` to the left edge of the screen (`circle.x = 0`).
 
 The `canvas` represents the blank screen and allows us to add drawings to it. The canvas has 2 very important *properties*:
-- `canvas.width` is the maximum x-coordinate on the screen.
-- `canvas.height` is the maximum y-coordinate on the screen.
 
-The minimum x and y coordinates are `0` and `0`. This is called the origin, where the x-axis and y-axis intersect at 0, and is always located in the top left corner of the browser window. 
+* `canvas.width` is the maximum x-coordinate on the screen.
+* `canvas.height` is the maximum y-coordinate on the screen.
+
+The minimum x and y coordinates are `0` and `0`. This is called the origin, where the x-axis and y-axis intersect at 0, and is always located in the top left corner of the browser window.
 
 <img src="img/screenBounds.png" height="300px">
 
@@ -334,13 +398,14 @@ The minimum x and y coordinates are `0` and `0`. This is called the origin, wher
 
 ```js
 game.checkCirclePosition = function(circle) {
-	// code that checks the other sides 
-	if (circle.x < 0) {
-		circle.x = canvas.width
-	}
-	// code that checks the other sides 
+    // code that checks the other sides
+    if (circle.x < 0) {
+        circle.x = canvas.width
+    }
+    // code that checks the other sides
 }
 ```
+
 </p>
 </details>
 
@@ -349,13 +414,14 @@ game.checkCirclePosition = function(circle) {
 
 ```js
 game.checkCirclePosition = function(circle) {
-	// code that checks the other sides 
-	if (circle.y > canvas.height) {
-		circle.y = 0;
-	}
-	// code that checks the other sides 
+    // code that checks the other sides
+    if (circle.y > canvas.height) {
+        circle.y = 0;
+    }
+    // code that checks the other sides
 }
 ```
+
 </p>
 </details>
 
@@ -364,19 +430,19 @@ game.checkCirclePosition = function(circle) {
 
 ```js
 game.checkCirclePosition = function(circle) {
-	// code that checks the other sides 
-	if (circle.y < 0) {
-		circle.y = canvas.height;
-	}
-	// code that checks the other sides 
+    // code that checks the other sides
+    if (circle.y < 0) {
+        circle.y = canvas.height;
+    }
+    // code that checks the other sides
 }
 ```
 </p>
 </details>
 
-### Step 6.3) CHALLENGE: 
+### Step 6.3) CHALLENGE
 
-The circle is centered around its own `x` and `y` position. You'll notice that the code above causes the circles to suddenly disappear and reappear at the edges. It would be nicer if the circles smoothly drifted off, and back on, the screen. 
+The circle is centered around its own `x` and `y` position. You'll notice that the code above causes the circles to suddenly disappear and reappear at the edges. It would be nicer if the circles smoothly drifted off, and back on, the screen.
 
 To find the outer right edge of the circle, we can use the `circle.radius` property like so:
 
@@ -391,19 +457,20 @@ circle.x + circle.radius;
 
 ```js
 if (circle.x + circle.radius > canvas.width) {
-	circle.x = 0 - circle.radius;
+    circle.x = 0 - circle.radius;
 }
 if (circle.x - circle.radius < 0) {
-	circle.x = canvas.width + circle.radius;
+    circle.x = canvas.width + circle.radius;
 }
 
 if (circle.y + circle.radius > canvas.height) {
-	circle.y = 0 - circle.radius;
+    circle.y = 0 - circle.radius;
 }
 if (circle.y - circle.radius < 0) {
-	circle.y = canvas.height + circle.radius;
+    circle.y = canvas.height + circle.radius;
 }
 ```
+
 </p>
 </details>
 
