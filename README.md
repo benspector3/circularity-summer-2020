@@ -190,184 +190,27 @@ circle2.y = circle2.y + circle2.velocityY;
 
 <hr>
 
-## TODO 4: Arrays
-
-Expanding this project to 5 circles is quite easy and fairly quick by copying and pasting code. Expanding the project to 100 circles, however, would take a while.
-
-The main issue is that we would need 100 separate variables that each contain the data for each circle. We would also need to have 100 copies of the code for creating and moving each circle. This sort of repetition presents an opportunity to program smarter, not harder by doing the following:
-
-* Using an **Array** will enable us to better manage large quantities of data that all need to be treated the same.
-* Using **loops** will enable us to more efficiently repeat code.
-
-This TODO will introduce Arrays and TODO 5 will introduce Loops. This TODO will have multiple steps.
-
-### Step 4.1) Introduce Arrays to manage data
-
-The first step is to create an Array that will hold all of the circle objects. Remember, the syntax for creating an array is:
-
-```js
-var myArray = [];
-```
-
-Let me briefly explain this example:
-
-* `var myArray`: we begin by declaring a new variable to hold this Array of data. We give it the name `myArray` (but we want our Array to be called `circles`)
-* `[]`: the `[` and `]` mark the beginning and end of the Array. Values that are added to the Array will go between those brackets.
-
-**CODE**: First, in the `PROGRAM SETUP` area and above your code for drawing your circles, declare a new array called `circles`.
-
-### Step 4.2) Push every circle into the Array
-
-Now we need to add each circle object into the `circles` Array. The syntax for pushing a variable into an Array is:
-
-```js
-myArray.push(value);
-```
-
-**CODE:** For each circle that you draw and add to the `view`, push that `circle` variable into the `circles` array.
-
-<details><summary>Hint</summary>
-<p>
-
-```js
-// you should already have these two lines
-var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle1);
-
-// add this line below
-circles.push(circle1);
-
-// do the same for each of your circle variables
-```
-
-</p>
-</details>
-
-<hr>
-
-## TODO 5: Loops
-
-Ok so big whoop, our data is now in Array. But wasn't the purpose to _reduce_ the number of variables, not make more?
-
-When we introduce a loop, all of those extra variables will go away. Remember, to create a loop you can follow the example below. This example will run 10 times by doing the following:
-
-* `var count = 1`: start counting at 1
-* `count++`: count up by 1s
-* `count <= 10`: keep counting *while* `count <= 10` (at 11 it won't run)
-
-```js
-for (var count = 1; count <= 10; count++) {
-    // code block for loop
-}
-```
-
-### Step 5.1) Use loops to draw 100 circles
-
-**CODE**: *Replace* your repetitive code that draws and adds circles to the `view` with a `for` loop. The loop should run 100 times and you can use the `{code block}` below for your loop:
-
-(Note: completing this step will cause your circles to stop moving. We'll get to that in the next step)
-
-```js
-{
-    // code block for the for loop
-    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-    view.addChild(circleX);
-    circles.push(circleX);
-}
-```
-
-We can keep using the same variable `circleX` over and over because we only really need to put our new circle object in that variable for a few lines of code. After the new circle object is pushed into the `circles` Array, we can safely overwrite the `circleX` variable with the next circle object on the next loop.
-
-<details><summary>Hint</summary>
-<p>
-
-```js
-for (var count = 1; count <= 100; count++) {
-    // code block for the for loop
-    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-    view.addChild(circleX);
-    circles.push(circleX);
-}
-```
-
-</p>
-</details>
-
-### Step 5.2) Iterate with loops to reduce repetition
-
-As I mentioned above, your circles won't be able to move now. That's because we have removed the variables `circle1`, `circle2`, etc... and replaced them with the Array `circles`.
-
-The most straightforward (but repetitive and tiresome) approach to fixing this would be to do the following:
-
-```js
-circles[0].x = circles[0].x + circles[0].velocityX;
-circles[0].y = circles[0].y + circles[0].velocityY;
-
-circles[1].x = circles[1].x + circles[1].velocityX;
-circles[1].y = circles[1].y + circles[1].velocityY;
-
-// do this for circles[2], circles[3], ... circles[99]
-```
-
-Let me briefly explain the code above:
-
-* We use **Bracket Notation** to access the one circle at a time from the `circles` Array. For example, `circles[0]` will give us the first circle object in the Array.
-* Each value in the Array is an object so we then use **Dot Notation** to access/modify the `.x` , `.y`, `.velocityX`, and `.velocityY` properties.
-* The code above is repeated for every value in the `circles` Array from index 0 to index 99.
-
-Obviously, doing this 100 times would be incredibly time consuming and inefficient. We want to work smarter, not harder by using loops!
-
-**CODE**: In the `update` function's `{code block}`, *replace* your repetitive code that moves your circles with a `for` loop. The loop should run once for each index/value in the `circles` array. 
-
-You can use the code block below, however, you will need to replace the `"?"` so that the computer changes which circle is being moved on each loop.
-
-```js
-{
-    // code block for the for loop
-    circles["?"].x = circles["?"].x + circles["?"].velocityX;
-    circles["?"].y = circles["?"].y + circles["?"].velocityY
-}
-```
-
-<details><summary>Hint</summary>
-<p>
-
-```js
-for (var i = 0; i <= circles.length-1; i++) { 
-    circles[i].x = circles[i].x + circles[i].velocityX;
-    circles[i].y = circles[i].y + circles[i].velocityY
-}
-```
-A few things to note about this solution:
-
-* The loop starts counting with `i = 0`, the first index of every Array.
-* The loop increases `i` by `1` since indexes of an Array increase by 1.
-* The loop stops after `i = circles.length-1`, the last index of the `circles` Array.
-* `circles[i]` accesses a different value from the `circles` array depending on the value of `i`
-</p>
-</details>
-
-<hr>
-
-## TODO 6: Bonus Challenge
+## TODO 4: Keep the circles on the screen
 
 We have created the outline for a function called `game.checkCirclePosition`. The purpose of this function is to take a circle object and make sure that it doesn't leave the boundaries of the board. 
 
 This TODO has 2 steps. Make sure to complete them all before moving on.
 
-### Step 6.1) Call `game.checkCirclePosition` on each of your circles
+### Step 4.1) Call `game.checkCirclePosition` on each of your circles
 
-**CODE:** Inside the `update` function's `{code block}` and inside the `for` loop's `{code block}`, call `game.checkCirclePosition()`  on each circle in the `circles` array, like so:
+**CODE:** Inside the `update` function's `{code block}`, call `game.checkCirclePosition()`  on each circle variable like so:
 
 ```javascript
-game.checkCirclePosition(circles[i]);
+game.checkCirclePosition(circle1);
+game.checkCirclePosition(circle2);
+// and so on for circle3, circle4, circle5
 ```
 
 **Save your code and refresh your program.**
 
-At this point you'll notice that the circles only come back if they exit through the right side of the screen. In the next part, we'll fix this.
+Now, as your circles move off the scren, they _should_ come back but you'll notice that the circles only come back if they exit through the right side of the screen. In the next part, we'll fix this.
 
-### Step 6.2) Complete the `game.checkCirclePosition()` Function
+### Step 4.2) Complete the `game.checkCirclePosition()` Function
 
 Currently, the function contains the following code:
 
@@ -445,7 +288,7 @@ game.checkCirclePosition = function(circle) {
 </p>
 </details>
 
-### Step 6.3) CHALLENGE
+### Step 4.3) BONUS CHALLENGE (optional)
 
 The circle is centered around its own `x` and `y` position. You'll notice that the code above causes the circles to suddenly disappear and reappear at the edges. It would be nicer if the circles smoothly drifted off, and back on, the screen.
 
@@ -478,6 +321,169 @@ if (circle.y - circle.radius < 0) {
 
 </p>
 </details>
+
+# Pause and take a break. 
+
+Well done so far! Check in with your instructor to make sure your code is complete for the first 4 TODOs before continuing on.
+
+## TODO 5: Arrays
+
+Expanding this project to 5 circles is quite easy and fairly quick by copying and pasting code. Expanding the project to 100 circles, however, would take a while.
+
+The main issue is that we would need 100 separate variables that each contain the data for each circle. We would also need to have 100 copies of the code for creating and moving each circle. This sort of repetition presents an opportunity to program smarter, not harder by doing the following:
+
+* Using an **Array** will enable us to better manage large quantities of data that all need to be treated the same.
+* Using **loops** will enable us to more efficiently repeat code.
+
+This TODO will introduce Arrays and TODO 6 will introduce Loops. This TODO will have multiple steps.
+
+### Step 5.1) Introduce Arrays to manage data
+
+The first step is to create an Array that will hold all of the circle objects. Remember, the syntax for creating an array is:
+
+```js
+var myArray = [];
+```
+
+Let me briefly explain this example:
+
+* `var myArray`: we begin by declaring a new variable to hold this Array of data. We give it the name `myArray` (but we want our Array to be called `circles`)
+* `[]`: the `[` and `]` mark the beginning and end of the Array. Values that are added to the Array will go between those brackets.
+
+**CODE**: First, in the `PROGRAM SETUP` area and above your code for drawing your circles, declare a new array called `circles`.
+
+### Step 5.2) Push every circle into the Array
+
+Now we need to add each circle object into the `circles` Array. The syntax for pushing a variable into an Array is:
+
+```js
+myArray.push(value);
+```
+
+**CODE:** For each circle that you draw and add to the `view`, push that `circle` variable into the `circles` array.
+
+<details><summary>Hint</summary>
+<p>
+
+```js
+// you should already have these two lines
+var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+view.addChild(circle1);
+
+// add this line below
+circles.push(circle1);
+
+// do the same for each of your circle variables
+```
+
+</p>
+</details>
+
+<hr>
+
+## TODO 6: Loops
+
+Ok so big whoop, our data is now in Array. But wasn't the purpose to _reduce_ the number of variables, not make more?
+
+When we introduce a loop, all of those extra variables will go away. Remember, to create a loop you can follow the example below. This example will run 10 times by doing the following:
+
+* `var count = 1`: start counting at 1
+* `count++`: count up by 1s
+* `count <= 10`: keep counting *while* `count <= 10` (at 11 it won't run)
+
+```js
+for (var count = 1; count <= 10; count++) {
+    // code block for loop
+}
+```
+
+### Step 6.1) Use loops to draw 100 circles
+
+**CODE**: *Replace* your repetitive code that draws and adds circles to the `view` with a `for` loop. The loop should run 100 times and you can use the `{code block}` below for your loop:
+
+(Note: completing this step will cause your circles to stop moving. We'll get to that in the next step)
+
+```js
+{
+    // code block for the for loop
+    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+    view.addChild(circleX);
+    circles.push(circleX);
+}
+```
+
+We can keep using the same variable `circleX` over and over because we only really need to put our new circle object in that variable for a few lines of code. After the new circle object is pushed into the `circles` Array, we can safely overwrite the `circleX` variable with the next circle object on the next loop.
+
+<details><summary>Hint</summary>
+<p>
+
+```js
+for (var count = 1; count <= 100; count++) {
+    // code block for the for loop
+    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+    view.addChild(circleX);
+    circles.push(circleX);
+}
+```
+
+</p>
+</details>
+
+### Step 6.2) Iterate with loops to reduce repetition
+
+As I mentioned above, your circles won't be able to move now. That's because we have removed the variables `circle1`, `circle2`, etc... and replaced them with the Array `circles`.
+
+The most straightforward (but repetitive and tiresome) approach to fixing this would be to do the following:
+
+```js
+circles[0].x = circles[0].x + circles[0].velocityX;
+circles[0].y = circles[0].y + circles[0].velocityY;
+
+circles[1].x = circles[1].x + circles[1].velocityX;
+circles[1].y = circles[1].y + circles[1].velocityY;
+
+// do this for circles[2], circles[3], ... circles[99]
+```
+
+Let me briefly explain the code above:
+
+* We use **Bracket Notation** to access the one circle at a time from the `circles` Array. For example, `circles[0]` will give us the first circle object in the Array.
+* Each value in the Array is an object so we then use **Dot Notation** to access/modify the `.x` , `.y`, `.velocityX`, and `.velocityY` properties.
+* The code above is repeated for every value in the `circles` Array from index 0 to index 99.
+
+Obviously, doing this 100 times would be incredibly time consuming and inefficient. We want to work smarter, not harder by using loops!
+
+**CODE**: In the `update` function's `{code block}`, *replace* your repetitive code that moves your circles with a `for` loop. The loop should run once for each index/value in the `circles` array. 
+
+You can use the code block below, however, you will need to replace the `"?"` so that the computer changes which circle is being moved on each loop.
+
+```js
+{
+    // code block for the for loop
+    circles["?"].x = circles["?"].x + circles["?"].velocityX;
+    circles["?"].y = circles["?"].y + circles["?"].velocityY
+}
+```
+
+<details><summary>Hint</summary>
+<p>
+
+```js
+for (var i = 0; i <= circles.length-1; i++) { 
+    circles[i].x = circles[i].x + circles[i].velocityX;
+    circles[i].y = circles[i].y + circles[i].velocityY
+}
+```
+A few things to note about this solution:
+
+* The loop starts counting with `i = 0`, the first index of every Array.
+* The loop increases `i` by `1` since indexes of an Array increase by 1.
+* The loop stops after `i = circles.length-1`, the last index of the `circles` Array.
+* `circles[i]` accesses a different value from the `circles` array depending on the value of `i`
+</p>
+</details>
+
+<hr>
 
 Congrats!
 
