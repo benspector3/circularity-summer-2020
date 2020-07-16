@@ -308,17 +308,17 @@ circle.x + circle.radius;
 <p>
 
 ```js
-if (circle.x + circle.radius > canvas.width) {
+if (circle.x - circle.radius > canvas.width) {
     circle.x = 0 - circle.radius;
 }
-if (circle.x - circle.radius < 0) {
+if (circle.x + circle.radius < 0) {
     circle.x = canvas.width + circle.radius;
 }
 
-if (circle.y + circle.radius > canvas.height) {
+if (circle.y - circle.radius > canvas.height) {
     circle.y = 0 - circle.radius;
 }
-if (circle.y - circle.radius < 0) {
+if (circle.y + circle.radius < 0) {
     circle.y = canvas.height + circle.radius;
 }
 ```
