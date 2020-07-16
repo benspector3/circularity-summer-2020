@@ -158,9 +158,13 @@ In this step, we will expand the project and create multiple circles! This TODO 
 ```js
 var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
 view.addChild(circle1);
+circle1.velocityX = randomNumberBetween(-1, 1);
+circle1.velocityY = randomNumberBetween(-1, 1);
 
 var circle2 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
 view.addChild(circle2);
+circle2.velocityX = randomNumberBetween(-1, 1);
+circle2.velocityY = randomNumberBetween(-1, 1);
 
 //... the same thing above to create circle3, circle4, and circle5
 ```
