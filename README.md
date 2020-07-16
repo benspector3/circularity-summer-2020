@@ -483,6 +483,8 @@ A few things to note about this solution:
 </p>
 </details>
 
+**CODE:** Finally, apply the same process as above to call `game.checkCirclePosition` on every circle in your `circles` Array.
+
 <hr>
 
 Congrats!
