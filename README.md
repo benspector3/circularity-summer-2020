@@ -394,7 +394,7 @@ The `canvas` represents the blank screen and allows us to add drawings to it. Th
 
 The minimum x and y coordinates are `0` and `0`. This is called the origin, where the x-axis and y-axis intersect at 0, and is always located in the top left corner of the browser window.
 
-<img src="img/screenBounds.png" height="300px">
+<img src="https://raw.githubusercontent.com/OperationSpark/circularity/master/img/screenBounds.png?token=AHJVWWFBLD7KTPDJKHRHM5K7DHKEK" height="300px">
 
 **CODE:** Add additional `if` statements to check the other three sides of the screen. Your Function should look like this:
 
