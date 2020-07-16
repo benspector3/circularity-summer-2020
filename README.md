@@ -245,7 +245,7 @@ The minimum x and y coordinates are `0` and `0`. This is called the origin, wher
 
 **CODE:** Add additional `if` statements to check the other three sides of the screen. Your Function should look like this:
 
-<details> <summary> Right Side Hint </summary>
+<details> <summary> Left Side Hint </summary>
 <p>
 
 ```js
