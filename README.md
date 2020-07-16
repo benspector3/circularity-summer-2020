@@ -149,7 +149,7 @@ In this step, we will expand the project and create multiple circles! This TODO 
 
 ### Step 3.1) Draw 5 circles
 
-**CODE** First, duplicate the code from TODO 1 so that you have a total of 5 circles drawn on your screen. For each circle, you should modify the name of the variable so that each circle has it's own variable name.
+**CODE** Again in the `PROGRAM SETUP` area, duplicate the code from TODO 1 so that you have a total of 5 circles drawn on your screen. For each circle, you should modify the name of the variable so that each circle has it's own variable name.
 
 <details><summary>Hint</summary>
 
@@ -157,10 +157,10 @@ In this step, we will expand the project and create multiple circles! This TODO 
 
 ```js
 var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle);
+view.addChild(circle1);
 
 var circle2 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-view.addChild(circle);
+view.addChild(circle2);
 
 //... the same thing above to create circle3, circle4, and circle5
 ```
