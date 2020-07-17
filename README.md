@@ -477,6 +477,27 @@ A few things to note about this solution:
 
 <hr>
 
-Congrats!
+# Pushing your work back to GitHub
+
+After you've completed this project, run (cut and paste) the four commands below:
+
+1. Change directories into your github folder. The result should look something like this: `cd "hallebot.github.io"` (the github username of the user in this example is `hallebot`). Once your command looks similar to this, press enter to move on to the next command:
+
+        cd "replace this with your github repository folder"
+
+2. Add all your changes to a changeset:
+    
+        git add -A
+    
+3. Commit your changeset:
+    
+        git commit -m "create awesome platformer game"
+    
+4. Push your changeset to your GitHub forked repository:
+    
+        git push
+    
+
+Great work! Pat yourselve on the back and show off your animation!
 
 &copy; Operation Spark 2015
