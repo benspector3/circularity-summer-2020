@@ -38,6 +38,29 @@ All coding will be done in the `js/init.js` file.
 
 <hr>
 
+# Important Changes to Note
+
+These instructions are designed to work with the stencil code provided by the project at github.com/OperationSpark/circularity. To avoid confusion, please do the following:
+1. At the bottom of the file, delete the lines of code below:
+
+```js
+game.circles = circles;
+```
+
+and 
+
+```js
+game.update = update;
+```
+
+2. On line 17, add the following:
+
+```js
+var circles;
+```
+
+3. Delete all comments that begin with: `// TODO X: ...`
+
 # TODOs
 
 ## TODO 1: Draw a circle
