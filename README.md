@@ -370,9 +370,11 @@ myArray.push(value);
 <p>
 
 ```js
-// you should already have these two lines
+// you should already have these 4 lines
 var circle1 = draw.randomCircleInArea(canvas, true, true, '#999', 2);
 view.addChild(circle1);
+circle1.velocityX = randomNumberBetween(-1, 1);
+circle1.velocityY = randomNumberBetween(-1, 1);
 
 // add this line below
 circles.push(circle1);
@@ -403,20 +405,11 @@ for (var count = 1; count <= 10; count++) {
 
 ### Step 6.1) Use loops to draw 100 circles
 
-**CODE**: *Replace* your repetitive code that draws and adds circles to the `view` with a `for` loop. The loop should run 100 times and you can use the `{code block}` below for your loop:
+**CODE**: Identify your repetitive code that creates a circle and move it inside a `for` loop. The loop should run 100 times. and you can use the `{code block}` below for your loop:
 
 (Note: completing this step will cause your circles to stop moving. We'll get to that in the next step)
 
-```js
-{
-    // code block for the for loop
-    var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-    view.addChild(circleX);
-    circles.push(circleX);
-}
-```
 
-We can keep using the same variable `circleX` over and over because we only really need to put our new circle object in that variable for a few lines of code. After the new circle object is pushed into the `circles` Array, we can safely overwrite the `circleX` variable with the next circle object on the next loop.
 
 <details><summary>Hint</summary>
 <p>
@@ -426,9 +419,13 @@ for (var count = 1; count <= 100; count++) {
     // code block for the for loop
     var circleX = draw.randomCircleInArea(canvas, true, true, '#999', 2);
     view.addChild(circleX);
+    circleX.velocityX = randomNumberBetween(-1, 1);
+    circleX.velocityY = randomNumberBetween(-1, 1);
     circles.push(circleX);
 }
 ```
+
+We can keep using the same variable `circleX` over and over because we only really need to put our new circle object in that variable for a few lines of code. After the new circle object is pushed into the `circles` Array, we can safely overwrite the `circleX` variable with the next circle object on the next loop.
 
 </p>
 </details>
@@ -457,17 +454,7 @@ Let me briefly explain the code above:
 
 Obviously, doing this 100 times would be incredibly time consuming and inefficient. We want to work smarter, not harder by using loops!
 
-**CODE**: In the `update` function's `{code block}`, *replace* your repetitive code that moves your circles with a `for` loop. The loop should run once for each index/value in the `circles` array. 
-
-You can use the code block below, however, you will need to replace the `"?"` so that the computer changes which circle is being moved on each loop.
-
-```js
-{
-    // code block for the for loop
-    circles["?"].x = circles["?"].x + circles["?"].velocityX;
-    circles["?"].y = circles["?"].y + circles["?"].velocityY
-}
-```
+**CODE**: In the `update` function's `{code block}`, identify your repetitive code and move it into a `for` loop. The loop should run once for each index/value in the `circles` array. 
 
 <details><summary>Hint</summary>
 <p>
@@ -475,7 +462,8 @@ You can use the code block below, however, you will need to replace the `"?"` so
 ```js
 for (var i = 0; i <= circles.length-1; i++) { 
     circles[i].x = circles[i].x + circles[i].velocityX;
-    circles[i].y = circles[i].y + circles[i].velocityY
+    circles[i].y = circles[i].y + circles[i].velocityY;
+    game.checkCirclePosition(circles[i]);
 }
 ```
 A few things to note about this solution:
@@ -486,8 +474,6 @@ A few things to note about this solution:
 * `circles[i]` accesses a different value from the `circles` array depending on the value of `i`
 </p>
 </details>
-
-**CODE:** Finally, apply the same process as above to call `game.checkCirclePosition` on every circle in your `circles` Array.
 
 <hr>
 
