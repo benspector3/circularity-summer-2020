@@ -502,7 +502,9 @@ A few things to note about this solution:
 
 # Pushing your work back to GitHub
 
-After you've completed this project, run (cut and paste) the four commands below:
+After you've completed this project, run (cut and paste) the four commands below into a Bash Terminal:
+
+(If you can't find your bash terminal, go to **Window** --> **New Terminal**)
 
 1. Change directories into your github folder. The result should look something like this: `cd "hallebot.github.io"` (the github username of the user in this example is `hallebot`). Once your command looks similar to this, press enter to move on to the next command:
 
