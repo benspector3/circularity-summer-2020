@@ -407,7 +407,7 @@ for (var count = 1; count <= 10; count++) {
 
 **CODE**: Identify your repetitive code that creates a circle and move it inside a `for` loop. The loop should run 100 times. and you can use the `{code block}` below for your loop:
 
-(Note: completing this step will cause your circles to stop moving. We'll get to that in the next step)
+(Note: completing this step will cause your circles to disappear. We'll get to that in the next step)
 
 
 
@@ -432,7 +432,7 @@ We can keep using the same variable `circleX` over and over because we only real
 
 ### Step 6.2) Iterate with loops to reduce repetition
 
-As I mentioned above, your circles won't be able to move now. That's because we have removed the variables `circle1`, `circle2`, etc... and replaced them with the Array `circles`.
+As I mentioned above, your circles will be gone. That's because we have removed the variables `circle1`, `circle2`, etc... and replaced them with the Array `circles`.
 
 The most straightforward (but repetitive and tiresome) approach to fixing this would be to do the following:
 
